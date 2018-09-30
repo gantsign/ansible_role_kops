@@ -1,2 +1,9 @@
 ---
-# defaults file for ansible_role_kops
+# kops version number
+kops_version: '1.10.0'
+
+# Mirror to download the kops from
+kops_mirror: 'https://github.com/kubernetes/kops/releases/download/{{ kops_version }}'
+
+# Directory to store files downloaded for kops
+kops_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"

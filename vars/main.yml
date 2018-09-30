@@ -1,2 +1,15 @@
 ---
-# vars file for ansible_role_kops
+# The OS of the kops redistributable
+kops_os: 'linux'
+
+# The CPU architecture of the kops redistributable
+kops_architecture: 'amd64'
+
+# File name of the kops redistributable file
+kops_redis_filename: 'kops-{{ kops_os }}-{{ kops_architecture }}'
+
+# File name of the kops download file
+kops_download_filename: 'kops-{{ kops_version }}-{{ kops_os }}-{{ kops_architecture }}'
+
+# Dir where kops should be installed
+kops_install_dir: '/usr/local/bin'
