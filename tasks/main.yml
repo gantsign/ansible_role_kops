@@ -1,2 +1,36 @@
 ---
-# tasks file for ansible_role_kops
+- name: create download directory
+  file:
+    state: directory
+    mode: 'u=rwx,go=rx'
+    dest: '{{ kops_download_dir }}'
+
+- name: download sha1
+  get_url:
+    url: '{{ kops_mirror }}/{{ kops_redis_filename }}-sha1'
+    dest: '{{ kops_download_dir }}/{{ kops_download_filename }}-sha1'
+    force: no
+    mode: 'u=rw,go=r'
+
+- name: read sha1
+  slurp:
+    src: '{{ kops_download_dir }}/{{ kops_download_filename }}-sha1'
+  register: kops_sha1
+
+- name: download kops
+  get_url:
+    url: '{{ kops_mirror }}/{{ kops_redis_filename }}'
+    dest: '{{ kops_download_dir }}/{{ kops_download_filename }}'
+    checksum: 'sha1:{{ kops_sha1.content | b64decode | trim }}'
+    force: no
+    mode: 'u=rw,go=r'
+
+- name: install kops
+  become: yes
+  copy:
+    src: '{{ kops_download_dir }}/{{ kops_download_filename }}'
+    remote_src: yes
+    dest: '{{ kops_install_dir }}/kops'
+    owner: root
+    group: root
+    mode: 'u=rwx,go=rx'
