@@ -44,7 +44,7 @@ are shown below):
 
 ```yaml
 # kops version number
-kops_version: '1.11.1'
+kops_version: '1.12.1'
 
 # Mirror to download the kops from
 kops_mirror: 'https://github.com/kubernetes/kops/releases/download/{{ kops_version }}'
