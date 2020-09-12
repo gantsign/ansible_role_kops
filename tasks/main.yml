@@ -7,14 +7,14 @@
 
 - name: download sha1
   get_url:
-    url: '{{ kops_mirror }}/{{ kops_redis_filename }}-sha1'
-    dest: '{{ kops_download_dir }}/{{ kops_download_filename }}-sha1'
+    url: '{{ kops_mirror }}/{{ kops_checksum_filename }}'
+    dest: '{{ kops_download_dir }}/{{ kops_checksum_filename }}'
     force: no
     mode: 'u=rw,go=r'
 
 - name: read sha1
   slurp:
-    src: '{{ kops_download_dir }}/{{ kops_download_filename }}-sha1'
+    src: '{{ kops_download_dir }}/{{ kops_checksum_filename }}'
   register: kops_sha1
 
 - name: download kops
