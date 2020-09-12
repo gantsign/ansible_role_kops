@@ -13,3 +13,9 @@ kops_download_filename: 'kops-{{ kops_version }}-{{ kops_os }}-{{ kops_architect
 
 # Dir where kops should be installed
 kops_install_dir: '/usr/local/bin'
+
+# Checksum separator
+kops_checksum_separator: "{{ ((kops_version | regex_replace('^v(.*)$', '\\1')) is version('1.18', '>=')) | ternary('.', '-') }}"
+
+# Checksum filename
+kops_checksum_filename: '{{ kops_redis_filename }}{{ kops_checksum_separator }}sha1'
