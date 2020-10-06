@@ -11,7 +11,7 @@ for getting production grade Kubernetes clusters up and running.
 Requirements
 ------------
 
-* Ansible >= 2.7
+* Ansible >= 2.8
 
 * Linux Distribution
 
